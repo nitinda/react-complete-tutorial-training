@@ -1,80 +1,52 @@
-// import React, { useState } from "react";
 import React, { Component } from "react";
 import "./App.css";
-import Person from "./Person/Person";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Validation from "./Validation/Validation";
+import "bootstrap/dist/css/bootstrap.css";
+import Char from "./Char/Char";
 
 class App extends Component {
   state = {
-    persons: [
-      { id: '1', name: "Kuttus",age: 5, },
-      { id: '2', name: "Kunjus",age: 0, },
-      { id: '3', name: "Puttus",age: 110,},
-    ],
-    showPersons: false
+    userInput: "",
   };
 
-  togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons
-    this.setState({showPersons: !doesShow})
+  inputChnagedHandler = (event) => {
+    this.setState({ userInput: event.target.value });
   };
 
-  deletePersonsHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
-    const persons = [...this.state.persons]
-    persons.splice(personIndex,1);
-    this.setState({persons: persons});
-  };
-
-  nameChangeHandler = (event, id) => {
-
-    const  personIndex = this.state.persons.findIndex(p => {
-      return p.id === id
-    })
-
-    const person = {
-      ...this.state.persons[personIndex]
-    }
-
-    person.name = event.target.value
-
-    const persons = [...this.state.persons]
-    persons[personIndex] = person
-
-    this.setState({ persons: persons});
+  deleteCharHandler = (index) => {
+    const text = this.state.userInput.split('')
+    text.splice(index,1)
+    const updatedText = text.join('')
+    this.setState({userInput: updatedText})
   };
 
   render() {
-    let persons = null;
-
-    if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person,index) => {
-            return <Person 
-            key={person.id}
-            click={() => this.deletePersonsHandler(index)}
-            name={person.name}
-            age={person.age}
-            changed={(event) => this.nameChangeHandler(event,person.id)} />
-          })}          
-        </div>
-      )
-    }
-
+    const charList = this.state.userInput.split("").map((ch, index) => {
+      return (
+        <Char
+          character={ch}
+          key={index}
+          clicked={() => this.deleteCharHandler(index)}
+        />
+      );
+    });
     return (
-      <div className="App">
-        <h1>Aeroplane flying in the sky</h1>
-        <p>Its not working</p>
-        <button
-          type="button"
-          className="btn btn-primary btn-lg"
-          onClick={this.togglePersonsHandler}
-        >
-          Toggle Persons
-        </button>
-          {persons}
+      <div className="input-group mb-3">
+        <span className="input-group-text" id="basic-addon1">
+          @
+        </span>
+        <input
+          className="form-control"
+          type="text"
+          onChange={this.inputChnagedHandler}
+          value={this.state.userInput}
+        />
+        <br />
+        <p className="text-center">
+          The length of above sting: {this.state.userInput.length}
+        </p>
+        <Validation inputValue={this.state.userInput.length} />
+        {charList}
       </div>
     );
   }
