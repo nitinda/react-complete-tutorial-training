@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Persons from "../components/Persons/Persons";
+import Cockpit from '../components/Cockpit/Cockpit'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -20,7 +21,6 @@ class App extends Component {
   };
 
   deletePersonsHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
@@ -57,30 +57,9 @@ class App extends Component {
         </div>
       );
     }
-
-    let classes = [];
-    if (this.state.persons.length > 2) {
-      classes.push("btn btn-primary btn-lg");
-    }
-    if (this.state.persons.length <= 2) {
-      classes.push("btn btn-success btn-lg");
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push("btn btn-danger btn-lg");
-    }
-
     return (
       <div className="App">
-        <h1>Aeroplane flying in the sky......</h1>
-        <p>Its not working</p>
-        <button
-          type="button"
-          // className="btn btn-primary btn-lg"
-          className={classes.join(" ")}
-          onClick={this.togglePersonsHandler}
-        >
-          Toggle Persons
-        </button>
+        <Cockpit persons={this.state.persons} clicked={this.togglePersonsHandler}></Cockpit>
         {persons}
       </div>
     );
