@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+  useEffect(() => {
+    console.log('[Cockpit.log] useEffect')
+    setTimeout(() => {
+      alert('Saved data to cloud!!!')
+    }, 1000)
+  },[])
+
   let classes = [];
   if (props.persons.length > 2) {
     classes.push("btn btn-primary btn-lg");
@@ -30,4 +37,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default Cockpit;
