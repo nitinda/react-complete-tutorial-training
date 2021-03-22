@@ -9,16 +9,26 @@ const Cockpit = (props) => {
     setTimeout(() => {
       alert('Saved data to cloud!!!')
     }, 1000)
+    return () => {
+      console.log("[Cockpit.js] cleanup work in userEffect")
+    }
   },[])
 
+  useEffect(() => {
+    console.log("[Cockpit.js] 2nd userEffect")
+    return () => {
+      console.log("[Cockpit.js] cleanup work in 2nd userEffect")
+    }
+  })
+
   let classes = [];
-  if (props.persons.length > 2) {
+  if (props.personsLength > 2) {
     classes.push("btn btn-primary btn-lg");
   }
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     classes.push("btn btn-success btn-lg");
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     classes.push("btn btn-danger btn-lg");
   }
   return (
@@ -37,4 +47,4 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
