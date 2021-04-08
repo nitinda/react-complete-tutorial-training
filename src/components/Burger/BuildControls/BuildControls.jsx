@@ -67,7 +67,7 @@ const buildControls = (props) => {
             />
           );
         })}
-        <StyledButton disabled={!props.purchasable}>ORDER NOW</StyledButton>
+        <StyledButton disabled={!props.purchasable} onClick={props.orderUP}>ORDER NOW</StyledButton>
       </div>
     </Typography>
   );

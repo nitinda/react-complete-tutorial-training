@@ -42,13 +42,6 @@ const BuildControl = (props) => {
       <Fab color="secondary" aria-label="remove" disabled={props.disabled}>
         <RemoveIcon onClick={props.removed} />
       </Fab>
-      {/* <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-      >
-        {props.label}{" "}
-      </Button> */}
       <StyledButton>{props.label}</StyledButton>
       <Fab color="primary" aria-label="add">
         <AddIcon onClick={props.added} />
