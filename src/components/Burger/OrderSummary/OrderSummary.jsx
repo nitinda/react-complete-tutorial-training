@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+// import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const orderSummary = (props) => {
   const ingredientSummary = Object.keys(props.ingredients).map((igKey) => {
@@ -18,12 +19,19 @@ const orderSummary = (props) => {
         <ListItemText id={"switch-list-label-" + {igKey}} primary={<span style={{ textTransform: 'capitalize' }}>{igKey} : {props.ingredients[igKey]}</span>} />
       </ListItem>
     );
-    //   return ({igKey},":", {props.ingredients[igKey]})
   });
 
   return (
       <Aux>
-          <List>{ingredientSummary}</List>
+          <List>
+            {ingredientSummary}
+            <ListItem>
+              {/* <ListItemIcon>
+                <AttachMoneyIcon />
+              </ListItemIcon> */}
+              <ListItemText id="switch-list-label-order-total" primary={"Order Total: $" + props.price.toFixed(2)} />
+            </ListItem>
+          </List>
       </Aux>
   );
 };
