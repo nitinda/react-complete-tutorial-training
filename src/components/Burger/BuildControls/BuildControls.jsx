@@ -1,7 +1,7 @@
 import React from "react";
 
 import BuildControl from "./BuildControl/BuildControl";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { withStyles } from "@material-ui/core/styles";
@@ -42,7 +42,7 @@ const StyledButton = withStyles({
 
 const buildControls = (props) => {
   return (
-    <Typography component="div" style={{ height: "auto" }} align="center">
+    // <Typography component="div" style={{ height: "auto" }} align="center">
       <div className="BuildControls">
         <TextField
           label="Current Price"
@@ -69,7 +69,7 @@ const buildControls = (props) => {
         })}
         <StyledButton disabled={!props.purchasable} onClick={props.orderUP}>ORDER NOW</StyledButton>
       </div>
-    </Typography>
+    // </Typography>
   );
 };
 
