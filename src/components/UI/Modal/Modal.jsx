@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from '@material-ui/core/Dialog';
@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const styles = (theme) => ({
   root: {
@@ -53,39 +53,52 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+class Modal extends Component {
 
-const Modal = (props) => {
-  const open = props.showOrderSummary
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.showOrderSummary !== this.props.showOrderSummary
+  }
 
-  const handleClose = () => {
-    props.orderChangeUP();
-  };
-  return (
-    <div>
-      <Dialog
-        onClose={handleClose}
-        TransitionComponent={Transition}
-        aria-labelledby="customized-dialog-title"
-        aria-describedby="alert-dialog-slide-description"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Order Summary
-        </DialogTitle>
-        <DialogContent>
-            A delicious burger with the following ingredients
-        </DialogContent>
-        <DialogContent dividers>
-          <Typography gutterBottom component={'span'}>{props.children}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            CheckOut
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+  componentDidUpdate () {
+    console.log("[Model] Will update")
+  }
+
+  render () {
+    const open = this.props.showOrderSummary
+    const handleClose = () => {
+      this.props.orderChangeUP();
+    };
+
+    return (
+      <div>
+        <Dialog
+          onClose={handleClose}
+          TransitionComponent={Transition}
+          aria-labelledby="customized-dialog-title"
+          aria-describedby="alert-dialog-slide-description"
+          open={open}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            Order Summary
+          </DialogTitle>
+          <DialogContent>
+              A delicious burger with the following ingredients
+          </DialogContent>
+          <DialogContent dividers>
+            <Typography gutterBottom component={'span'}>{this.props.children}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+            <ShoppingCartIcon />
+              CheckOut
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+
+  
 };
 
 export default Modal;

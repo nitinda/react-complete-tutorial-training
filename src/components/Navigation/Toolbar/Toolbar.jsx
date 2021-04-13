@@ -14,6 +14,9 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CardMedia from '@material-ui/core/CardMedia';
 import burgerLogo from  "../../../assets/images/burger-logo.png"
 
+import NavigationItems from '../NavigationItems/NavigationItems'
+
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +25,15 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     maxWidth: 70,
+  },
+  mediaDrawer: {
+    maxWidth: 70,
+    display: "flex",
+    alignItems: "center",
+    // padding: theme.spacing(0, 1),
+    // // necessary for content to be below app bar
+    // ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -90,78 +102,31 @@ const ToolBar = (props) => {
   };
   return (
     <div className={classes.root}>
-      {/* <CssBaseline /> */}
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" className={clsx(classes.appBar, {[classes.appBarShift]: open,})}>
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
-            Burger App
+          <CardMedia component="img" alt="Burger Logo" className={classes.media} image={burgerLogo} title="Burger Logo"/>
+            {/* Burger App */}
           </Typography>
-          <Typography variant="h6" noWrap className={classes.title}>
-          <CardMedia
-                component="img"
-                alt="Burger Logo"
-                className={classes.media}
-                image={burgerLogo}
-                title="Burger Logo"
-              />
-          </Typography>
-
-          {/* <Typography align="left" className={classes.card}>
-          <CardMedia
-                component="img"
-                alt="Burger Logo"
-                className={classes.media}
-                image={burgerLogo}
-                title="Burger Logo"
-              />
+          {/* <Typography variant="h6" noWrap className={classes.title}>
+            <CardMedia component="img" alt="Burger Logo" className={classes.media} image={burgerLogo} title="Burger Logo"/>
           </Typography> */}
-          {/* <Card className={classes.card}>
-            <CardActionArea> */}
-              {/* <CardMedia
-                component="img"
-                alt="Burger Logo"
-                className={classes.media}
-                image={burgerLogo}
-                title="Burger Logo"
-              /> */}
-            {/* </CardActionArea>
-          </Card> */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-          >
+          <IconButton color="inherit" aria-label="open drawer" edge="end" onClick={handleDrawerOpen} className={clsx(open && classes.hide)}>
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="right"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
+      <Drawer className={classes.drawer} variant="persistent" anchor="right" open={open} classes={{paper: classes.drawerPaper,}}>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            {theme.direction === "rtl" ? (<ChevronLeftIcon />) : (<ChevronRightIcon />)}
           </IconButton>
+          {/* <Typography align="right"> */}
+            <CardMedia component="img" alt="Burger Logo" className={classes.mediaDrawer} image={burgerLogo} title="Burger Logo"/>
+          {/* </Typography> */}
         </div>
         <Divider />
-        <Divider />
+        <NavigationItems />
       </Drawer>
     </div>
   );
