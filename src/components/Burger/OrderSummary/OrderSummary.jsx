@@ -1,6 +1,6 @@
 import React from "react";
 
-import Aux from "../../../hoc/Aux";
+import Aux from "../../../hoc/Aux/Aux";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
